@@ -1,7 +1,8 @@
 # conv_output_size
-### TLDR
-Helper to calculate output size of tensor after convolutional layer.
+![logo](conv_output_size.png)
 
+## TLDR
+A helper function to estimate output size of PyTorch tensor after convolutional layer, according to definitions in [`nn.Conv1d`](https://pytorch.org/docs/stable/generated/torch.nn.Conv1d.html), [`nn.Conv2d`](https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html) and [`nn.Conv3d`](https://pytorch.org/docs/stable/generated/torch.nn.Conv3d.html)
 ### Import as follows and define convolutional layer parameters:
 ```python
 import torch
@@ -28,18 +29,16 @@ c1d = nn.Conv1d(in_channels=c_i, out_channels=c_o, kernel_size=k,
 output_size = conv1d_output_size(
     sample_1d_tensor.shape, out_channels=c_o, kernel_size=k, stride=s, padding=p)
 
-
 print("After conv1d")
-print("Dummy input size: ", sample_1d_tensor.shape)
-print("Calculated output size: ", output_size)
-print("Real output size: ", c1d(sample_1d_tensor).detach().numpy().shape, end="\n---\n")
+print("Dummy input size:", sample_1d_tensor.shape)
+print("Calculated output size:", output_size)
+print("Real output size:", c1d(sample_1d_tensor).detach().numpy().shape")
 ```
 ```bash
 >>> After conv1d
->>> Dummy input size:  torch.Size([3, 16])
->>> Calculated output size:  (16, 8)
->>> Real output size:  (16, 8)
->>> ---
+>>> Dummy input size: torch.Size([3, 16])
+>>> Calculated output size: (16, 8)
+>>> Real output size: (16, 8)
 ```
 
 ### Output size after conv2d:
@@ -52,16 +51,15 @@ output_size = conv2d_output_size(
     sample_2d_tensor.shape, out_channels=c_o, kernel_size=k, stride=s, padding=p)
 
 print("After conv2d")
-print("Dummy input size: ", sample_2d_tensor.shape)
-print("Calculated output: ", output_size)
-print("Real output: ", c2d(sample_2d_tensor).detach().numpy().shape, end="\n---\n")
+print("Dummy input size:", sample_2d_tensor.shape)
+print("Calculated output size:", output_size)
+print("Real output size:", c2d(sample_2d_tensor).detach().numpy().shape")
 ```
 ```bash
 >>> After conv2d
->>> Dummy input size:  torch.Size([3, 64, 64])
->>> Calculated output:  (16, 32, 32)
->>> Real output:  (16, 32, 32)
->>> ---
+>>> Dummy input size: torch.Size([3, 64, 64])
+>>> Calculated output size: (16, 32, 32)
+>>> Real output size: (16, 32, 32)
 ```
 
 
@@ -75,14 +73,13 @@ output_size = conv3d_output_size(
     sample_3d_tensor.shape, out_channels=c_o, kernel_size=k, stride=s, padding=p)
 
 print("After conv3d")
-print("Dummy input size: ", sample_3d_tensor.shape)
-print("Calculated output: ", output_size)
-print("Real output: ", c3d(sample_3d_tensor).detach().numpy().shape, end="\n---\n")
+print("Dummy input size:", sample_3d_tensor.shape)
+print("Calculated output size:", output_size)
+print("Real output size:", c3d(sample_3d_tensor).detach().numpy().shape")
 ```
 ```bash
 >>> After conv3d
->>> Dummy input size:  torch.Size([3, 64, 256, 256])
->>> Calculated output:  (16, 32, 128, 128)
->>> Real output:  (16, 32, 128, 128)
->>> ---
+>>> Dummy input size: torch.Size([3, 64, 256, 256])
+>>> Calculated output size: (16, 32, 128, 128)
+>>> Real output size: (16, 32, 128, 128)
 ```
